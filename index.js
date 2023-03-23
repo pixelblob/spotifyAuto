@@ -4,7 +4,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const axios = require("axios");
 const ytsr = require('ytsr');
 const fs = require('fs')
-const { spotify_clientid, spotify_clientsecret, song_path, spotify_playlist_id } = tryRequire('./configDev.json') || tryRequire('./config.json');
+const { spotify_clientid, spotify_clientsecret, song_path, spotify_playlist_id, cookie } = tryRequire('./configDev.json') || tryRequire('./config.json');
 const exclude = ["official video", "official music video", "official hd video", "video"]
 var spotifyApiKey
 
@@ -93,6 +93,11 @@ generateSpotifyApiKey().then(spotifyApiKey => {
 
                     let stream = ytdl(result.url, {
                         quality: 'highestaudio',
+                        requestOptions: {
+                            headers: {
+                              Cookie: cookie
+                            }
+                          }
                     })
 
                     let info = await ytdl.getInfo(result.url)
