@@ -4,7 +4,7 @@ const ffmpeg = require('fluent-ffmpeg');
 const axios = require("axios");
 const ytsr = require('ytsr');
 const fs = require('fs')
-const { spotify_clientid, spotify_clientsecret, song_path, spotify_playlist_id } = require('./configDev.json') || require('./config.json');
+const { spotify_clientid, spotify_clientsecret, song_path, spotify_playlist_id } = tryRequire('./configDev.json') || tryRequire('./config.json');
 const exclude = ["official video", "official music video", "official hd video", "video"]
 var spotifyApiKey
 
@@ -149,6 +149,13 @@ generateSpotifyApiKey().then(spotifyApiKey => {
     })
 })
 
+function tryRequire(path) {
+    try {
+        return require(path)
+    } catch (error) {
+        console.error(error)
+    }
+}
 
 async function youtubeSearch(query) {
     let results = await ytsr(query, { limit: 10 }).catch((error) => {
