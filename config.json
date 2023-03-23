@@ -1,4 +1,6 @@
 {
     "spotify_clientid": "",
-    "spotify_clientsecret": ""
+    "spotify_clientsecret": "",
+    "spotify_playlist_id": "",
+    "song_path": "./songs"
 }
