@@ -24,6 +24,8 @@ generateSpotifyApiKey().then(spotifyApiKey => {
     console.log("Refreshed Spotify Api Key!")
     getSpotifyPlaylist(spotify_playlist_id, 0, spotifyApiKey).then(async items => {
 
+        var items = items.filter(i=> i.track)
+
         console.log("TOTAL: " + items.length)
         var runningSongs = []
 
@@ -31,7 +33,7 @@ generateSpotifyApiKey().then(spotifyApiKey => {
 
         var convertedSongsNames = []
         items.forEach(i=>{
-            console.log(i)
+            //console.log(i)
             convertedSongsNames.push(`${i.track.name.replaceAll("\"", "").replaceAll("/", "")}.mp3`)
         })
 
