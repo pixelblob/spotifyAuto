@@ -29,7 +29,11 @@ generateSpotifyApiKey().then(spotifyApiKey => {
 
         var existingSongs = fs.readdirSync(song_path).filter(s => s.endsWith(".mp3"))
 
-        var convertedSongsNames = items.map(i => `${i.track.name.replaceAll("\"", "").replaceAll("/", "")}.mp3`)
+        var convertedSongsNames = []
+        items.forEach(i=>{
+            console.log(i)
+            convertedSongsNames.push(`${i.track.name.replaceAll("\"", "").replaceAll("/", "")}.mp3`)
+        })
 
         var songsProcessed = 0
         existingSongs.forEach(existingSong => {
@@ -162,6 +166,7 @@ async function getSpotifyPlaylist(id, offset, spotifyApiKey, songs = []) {
     })
     songs = songs.concat(req.data.items)
     if (req.data.next) {
+        console.log(req.data.next)
         return await getSpotifyPlaylist(id, offset + 100, spotifyApiKey, songs)
     }
     return songs
