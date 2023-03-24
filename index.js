@@ -91,6 +91,8 @@ generateSpotifyApiKey().then(spotifyApiKey => {
                         return console.log("Cannot find: " + item.track.name + " " + item.track.artists.map(a => a.name).join(" "))
                     }
 
+                    console.log(item.track.name)
+
                     let stream = ytdl(result.url, {
                         quality: 'highestaudio',
                         requestOptions: {
